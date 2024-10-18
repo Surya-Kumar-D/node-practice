@@ -10,19 +10,31 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD,
 );
 
-mongoose
-  .connect(DB)
-  .then((con) => {
-    console.log('Connected to the database');
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+mongoose.connect(DB).then((con) => {
+  console.log('Connected to the database');
+});
 
 const app = require('./app');
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log('Server is running on port 3000');
+});
+
+// TEST
+process.on('unhandledRejection', (err) => {
+  console.log(err.name, err.message);
+  console.log('unhandler Rejection! 💣 Shutting down...');
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
+process.on('uncaughtException', (err) => {
+  console.log(err.name, err.message);
+  console.log('unhandler Execption! 💣 Shutting down...');
+  server.close(() => {
+    process.exit(1);
+  });
 });

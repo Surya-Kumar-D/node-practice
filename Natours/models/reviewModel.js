@@ -15,20 +15,16 @@ const reviewSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
-    tour: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tour',
-        required: [true, 'Review must have a tour.'],
-      },
-    ],
-    user: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: [true, 'Review must have a user.'],
-      },
-    ],
+    tour: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Tour',
+      required: [true, 'Review must have a tour.'],
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'Review must have a user.'],
+    },
   },
   {
     toJSON: {

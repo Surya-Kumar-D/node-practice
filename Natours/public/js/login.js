@@ -42,7 +42,11 @@ const login = async (email, password) => {
   }
 };
 
+<<<<<<< HEAD
 document?.querySelector('.form--login')?.addEventListener('submit', (e) => {
+=======
+document.querySelector('.form--login').addEventListener('submit', (e) => {
+>>>>>>> 7b3286730bbb7433d96731b1ca9953e7f051c712
   e.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -64,13 +68,19 @@ const logout = async () => {
   }
 };
 
+<<<<<<< HEAD
 const logOutBtn = document?.querySelector('.nav__el--logout');
 
+=======
+const logOutBtn = document.querySelector('.nav__el--logout');
+console.log(logOutBtn);
+>>>>>>> 7b3286730bbb7433d96731b1ca9953e7f051c712
 if (logOutBtn) {
   logOutBtn.addEventListener('click', logout);
 }
 
 //UpdateSettings
+<<<<<<< HEAD
 //type is either 'password' or 'data'
 const updateSettings = async ({ data }, type) => {
   const url =
@@ -95,12 +105,35 @@ const updateSettings = async ({ data }, type) => {
 const userDataForm = document?.querySelector('.form-user-data');
 
 console.log(userDataForm);
+=======
+
+const updateSettings = async (email, name) => {
+  try {
+    const res = await axios({
+      method: 'PATCH',
+      url: 'http://localhost:8000/api/v1/users/updateMe',
+      data: {
+        name,
+        email,
+      },
+    });
+    if (res.data.status === 'success') {
+      showAlert('success', 'Data updated successfully');
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const userDataForm = document.querySelector('.form-user-data');
+>>>>>>> 7b3286730bbb7433d96731b1ca9953e7f051c712
 
 if (userDataForm) {
   userDataForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const name = document.getElementById('name').value;
+<<<<<<< HEAD
     updateSettings({ email, name }, 'data');
   });
 }
@@ -120,5 +153,8 @@ if (userPasswordForm) {
     updateSettings({ passwordConfirm, passwordCurrent, password }, 'password');
 
     document.querySelector('.btn--save-password').innerHTML = 'Save Passwords';
+=======
+    updateSettings(email, name);
+>>>>>>> 7b3286730bbb7433d96731b1ca9953e7f051c712
   });
 }

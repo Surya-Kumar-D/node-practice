@@ -42,11 +42,7 @@ const login = async (email, password) => {
   }
 };
 
-<<<<<<< HEAD
-document?.querySelector('.form--login')?.addEventListener('submit', (e) => {
-=======
-document.querySelector('.form--login').addEventListener('submit', (e) => {
->>>>>>> 7b3286730bbb7433d96731b1ca9953e7f051c712
+document.querySelector('.form--login')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -68,54 +64,20 @@ const logout = async () => {
   }
 };
 
-<<<<<<< HEAD
-const logOutBtn = document?.querySelector('.nav__el--logout');
-
-=======
 const logOutBtn = document.querySelector('.nav__el--logout');
 console.log(logOutBtn);
->>>>>>> 7b3286730bbb7433d96731b1ca9953e7f051c712
 if (logOutBtn) {
   logOutBtn.addEventListener('click', logout);
 }
 
 //UpdateSettings
-<<<<<<< HEAD
-//type is either 'password' or 'data'
-const updateSettings = async ({ data }, type) => {
-  const url =
-    type === 'password'
-      ? 'http://localhost:8000/api/v1/users/updateMyPassword'
-      : 'http://localhost:8000/api/v1/users/updateMe';
-  try {
-    const res = await axios({
-      method: 'PATCH',
-      url,
-      data,
-    });
-    if (res.data.status === 'success') {
-      showAlert('success', `${type?.toUpperCase()} updated successfully`);
-    }
-  } catch (err) {
-    console.log(err);
-    showAlert('error', err.response.data.message);
-  }
-};
 
-const userDataForm = document?.querySelector('.form-user-data');
-
-console.log(userDataForm);
-=======
-
-const updateSettings = async (email, name) => {
+const updateSettings = async (form) => {
   try {
     const res = await axios({
       method: 'PATCH',
       url: 'http://localhost:8000/api/v1/users/updateMe',
-      data: {
-        name,
-        email,
-      },
+      data: form,
     });
     if (res.data.status === 'success') {
       showAlert('success', 'Data updated successfully');
@@ -126,35 +88,16 @@ const updateSettings = async (email, name) => {
 };
 
 const userDataForm = document.querySelector('.form-user-data');
->>>>>>> 7b3286730bbb7433d96731b1ca9953e7f051c712
 
 if (userDataForm) {
   userDataForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = document.getElementById('email').value;
-    const name = document.getElementById('name').value;
-<<<<<<< HEAD
-    updateSettings({ email, name }, 'data');
-  });
-}
 
-const userPasswordForm = document.querySelector('.form-user-settings');
-
-if (userPasswordForm) {
-  userPasswordForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    document.querySelector('.btn--save-password').innerHTML =
-      'Updating Password...';
-
-    const passwordCurrent = document.getElementById('password-current').value;
-    const password = document.getElementById('password').value;
-
-    const passwordConfirm = document.getElementById('password-confirm').value;
-    updateSettings({ passwordConfirm, passwordCurrent, password }, 'password');
-
-    document.querySelector('.btn--save-password').innerHTML = 'Save Passwords';
-=======
-    updateSettings(email, name);
->>>>>>> 7b3286730bbb7433d96731b1ca9953e7f051c712
+    const form = new FormData();
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    form.append('photo', document.getElementById('photo').files[0]);
+    console.log(form);
+    updateSettings(form);
   });
 }
